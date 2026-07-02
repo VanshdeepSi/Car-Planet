@@ -50,15 +50,25 @@ export default async function CarDetailPage({ params }: { params: { id: string }
           <div className="lg:col-span-4 flex flex-col gap-8">
             <div>
               <h1 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-2">{car.year} {car.make} {car.model}</h1>
-              <p className="font-headline-md text-headline-md text-primary mb-4">₹{car.price.toLocaleString('en-IN')}</p>
+              <p className="font-headline-md text-headline-md text-primary mb-4">₹{car.price.toLocaleString('en-IN')} <span className="text-body-md text-on-surface-variant font-normal">(Negotiable)</span></p>
               <p className="font-body-md text-body-md text-on-surface-variant">EMI starting at ₹{Math.round(car.price * 0.012).toLocaleString('en-IN')}/mo</p>
             </div>
             <div className="flex flex-col gap-4">
-              <Link href={`/test-drive?car=${car.id}`} className="bg-primary text-white font-label-md uppercase tracking-widest py-4 w-full text-center hover:brightness-110 transition-colors">Book Test Drive</Link>
-              <Link href={`/finance?amount=${car.price}`} className="bg-transparent border border-white text-white font-label-md uppercase tracking-widest py-4 w-full text-center flex items-center justify-center gap-2 hover:bg-white hover:text-black transition-colors">
-                <span className="material-symbols-outlined">calculate</span>
-                Calculate EMI
-              </Link>
+              <form action="/test-drive" method="GET" className="flex flex-col gap-2">
+                <input type="hidden" name="car" value={car.id} />
+                <label htmlFor="offer" className="font-label-sm text-secondary uppercase tracking-wider">Want to negotiate?</label>
+                <div className="flex flex-col md:flex-row gap-2">
+                  <input type="number" id="offer" name="offer" placeholder="Enter your offer price (₹)..." className="flex-grow bg-background border border-surface-variant text-on-surface font-body-md px-4 py-4 focus:border-on-surface focus:ring-0 transition-colors" />
+                  <button type="submit" className="bg-primary text-white font-label-md uppercase tracking-widest py-4 px-6 md:w-auto w-full text-center hover:brightness-110 transition-colors whitespace-nowrap">Make Offer</button>
+                </div>
+              </form>
+              <div className="flex gap-2">
+                <Link href={`/test-drive?car=${car.id}`} className="flex-1 bg-charcoal border border-surface-variant text-white font-label-md uppercase tracking-widest py-4 text-center hover:bg-surface-variant transition-colors">Book Test Drive</Link>
+                <Link href={`/finance?amount=${car.price}`} className="flex-1 bg-transparent border border-surface-variant text-white font-label-md uppercase tracking-widest py-4 text-center flex items-center justify-center gap-2 hover:bg-white hover:text-black transition-colors">
+                  <span className="material-symbols-outlined">calculate</span>
+                  Calculate EMI
+                </Link>
+              </div>
             </div>
             
             {/* Spec Sheet Grid */}

@@ -12,9 +12,11 @@ function TestDriveForm() {
   
   const searchParams = useSearchParams();
   const carIdParam = searchParams.get('car');
+  const offerParam = searchParams.get('offer');
   
   // Initialize with the URL parameter if present, otherwise empty string
   const [selectedVehicle, setSelectedVehicle] = useState<string>(carIdParam || "");
+  const [offerPrice, setOfferPrice] = useState<string>(offerParam || "");
 
   useEffect(() => {
     async function fetchCars() {
@@ -42,12 +44,17 @@ function TestDriveForm() {
     const vehicleId = formData.get("vehicle");
     const date = formData.get("date");
     const time = formData.get("time");
+    const offer = formData.get("offer");
 
     // Find the selected car name for the message
     const selectedCar = cars.find(car => car.id === vehicleId);
     const vehicleName = selectedCar ? `${selectedCar.make} ${selectedCar.model}` : vehicleId;
 
-    const message = `*New Test Drive Booking*\n\n*Client Name:* ${name}\n*Client Phone:* ${phone}\n*Client Email:* ${email}\n*Preferred Vehicle:* ${vehicleName}\n*Preferred Date:* ${date}\n*Preferred Time:* ${time}`;
+    let message = `*New Test Drive Booking*\n\n*Client Name:* ${name}\n*Client Phone:* ${phone}\n*Client Email:* ${email}\n*Preferred Vehicle:* ${vehicleName}\n*Preferred Date:* ${date}\n*Preferred Time:* ${time}`;
+    
+    if (offer) {
+      message += `\n*Offer Price:* ₹${Number(offer).toLocaleString('en-IN')}`;
+    }
 
     try {
       const res = await fetch('/api/whatsapp', {
@@ -101,25 +108,39 @@ function TestDriveForm() {
               </div>
             </div>
             
-            <div>
-              <label className="block font-label-sm text-label-sm text-secondary mb-1 uppercase tracking-wider" htmlFor="vehicle">Preferred Vehicle</label>
-              <div className="relative">
-                <select 
-                  className="w-full bg-background border border-surface-variant text-on-surface font-body-md text-body-md px-4 py-3 appearance-none focus:border-on-surface focus:ring-0 transition-colors cursor-pointer rounded-none" 
-                  id="vehicle" 
-                  name="vehicle" 
-                  required 
-                  value={selectedVehicle}
-                  onChange={(e) => setSelectedVehicle(e.target.value)}
-                >
-                  <option className="text-secondary" disabled value="">SELECT IN-STOCK MODEL</option>
-                  {cars.map(car => (
-                    <option key={car.id} value={car.id}>{car.make} {car.model} {car.year ? `(${car.year})` : ''}</option>
-                  ))}
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-on-surface">
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: '\'wght\' 300, \'FILL\' 0' }}>expand_more</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block font-label-sm text-label-sm text-secondary mb-1 uppercase tracking-wider" htmlFor="vehicle">Preferred Vehicle</label>
+                <div className="relative">
+                  <select 
+                    className="w-full bg-background border border-surface-variant text-on-surface font-body-md text-body-md px-4 py-3 appearance-none focus:border-on-surface focus:ring-0 transition-colors cursor-pointer rounded-none" 
+                    id="vehicle" 
+                    name="vehicle" 
+                    required 
+                    value={selectedVehicle}
+                    onChange={(e) => setSelectedVehicle(e.target.value)}
+                  >
+                    <option className="text-secondary" disabled value="">SELECT IN-STOCK MODEL</option>
+                    {cars.map(car => (
+                      <option key={car.id} value={car.id}>{car.make} {car.model} {car.year ? `(${car.year})` : ''}</option>
+                    ))}
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-on-surface">
+                    <span className="material-symbols-outlined" style={{ fontVariationSettings: '\'wght\' 300, \'FILL\' 0' }}>expand_more</span>
+                  </div>
                 </div>
+              </div>
+              <div>
+                <label className="block font-label-sm text-label-sm text-secondary mb-1 uppercase tracking-wider" htmlFor="offer">Offer Price (Optional)</label>
+                <input 
+                  className="w-full bg-background border border-surface-variant text-on-surface font-body-md text-body-md px-4 py-3 focus:border-on-surface focus:ring-0 transition-colors placeholder-secondary/50" 
+                  id="offer" 
+                  name="offer" 
+                  placeholder="ENTER OFFER (₹)" 
+                  type="number"
+                  value={offerPrice}
+                  onChange={(e) => setOfferPrice(e.target.value)}
+                />
               </div>
             </div>
             
