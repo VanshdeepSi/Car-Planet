@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Lenis recommended CSS — keep this, it's required for smooth scroll to work correctly */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+        /* Minimalist-Technic Animations & Utilities */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        
+        .slide-up-load {
+            animation: slideUpLoad 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUpLoad {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-load {
+            animation: fadeInLoad 2s ease-in forwards;
+        }
+        @keyframes fadeInLoad {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .btn-primary-glow {
+            box-shadow: 0 0 0px rgba(255,0,0,0);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-glow:hover {
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .card-hover-border {
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .card-hover-border:hover {
+            border-bottom-color: #FF0000;
+            transform: translateY(-4px);
+        }
+
+        /* Line chart animation */
+        .draw-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            transition: stroke-dashoffset 2s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .draw-line.is-visible {
+            stroke-dashoffset: 0;
+        }
+        
+        .spring-bounce {
+            transform: scale(0.5);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .spring-bounce.is-visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000000; }
+        ::-webkit-scrollbar-thumb { background: #353535; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF0000; }
+    
+
+        /* Minimalist-Technic Animations & Utilities */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        
+        .slide-up-load {
+            animation: slideUpLoad 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUpLoad {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-load {
+            animation: fadeInLoad 2s ease-in forwards;
+        }
+        @keyframes fadeInLoad {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .btn-primary-glow {
+            box-shadow: 0 0 0px rgba(255,0,0,0);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-glow:hover {
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .card-hover-border {
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .card-hover-border:hover {
+            border-bottom-color: #FF0000;
+            transform: translateY(-4px);
+        }
+
+        /* Line chart animation */
+        .draw-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            transition: stroke-dashoffset 2s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .draw-line.is-visible {
+            stroke-dashoffset: 0;
+        }
+        
+        .spring-bounce {
+            transform: scale(0.5);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .spring-bounce.is-visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000000; }
+        ::-webkit-scrollbar-thumb { background: #353535; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF0000; }
+    
