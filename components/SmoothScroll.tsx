@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
  * Respects prefers-reduced-motion by skipping smoothing entirely.
  */
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
-  const lenisRef = useRef<{ lenis?: { raf: (time: number) => void } } | null>(null);
+  const lenisRef = useRef<any>(null);
   const reducedMotion =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
