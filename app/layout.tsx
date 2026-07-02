@@ -16,8 +16,8 @@ const bodyFont = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kinetic Noir Motors",
-  description: "Experience precision and velocity of high-end automotive engineering.",
+  title: "The Car Planet | Premium Pre-Owned Vehicles",
+  description: "Browse our exclusive inventory of meticulously inspected premium pre-owned vehicles. Sell your car or find your next perfect ride at The Car Planet.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
