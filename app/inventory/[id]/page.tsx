@@ -80,7 +80,7 @@ export default async function CarDetailPage({ params }: { params: { id: string }
                   <span className="text-on-surface font-body-md text-body-md font-semibold capitalize">{car.category || 'N/A'}</span>
                 </li>
                 <li className="flex justify-between py-3 border-b border-surface-variant bg-charcoal px-3">
-                  <span className="text-on-surface-variant font-label-md text-label-md">Mileage</span>
+                  <span className="text-on-surface-variant font-label-md text-label-md">KM Driven</span>
                   <span className="text-on-surface font-body-md text-body-md font-semibold">{car.mileage_km.toLocaleString()} km</span>
                 </li>
                 <li className="flex justify-between py-3 border-b border-surface-variant bg-surface px-3">

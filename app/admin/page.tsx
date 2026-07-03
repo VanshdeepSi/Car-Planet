@@ -230,8 +230,8 @@ export default function AdminPage() {
                 <input name="price" type="number" min="0" className="bg-black border border-surface-variant focus:border-primary outline-none w-full p-3 font-body-md text-white transition-colors" placeholder="e.g. 15000000" required />
               </div>
 
-              <div className="space-y-2">
-                <label className="font-label-sm text-tertiary uppercase tracking-wider block">Kilometers Driven *</label>
+              <div className="flex flex-col gap-2">
+                <label className="font-label-sm text-tertiary uppercase text-[10px]">KM Driven</label>
                 <input name="mileage" type="number" min="0" className="bg-black border border-surface-variant focus:border-primary outline-none w-full p-3 font-body-md text-white transition-colors" placeholder="e.g. 12500" required />
               </div>
 
@@ -410,8 +410,8 @@ export default function AdminPage() {
                   <label className="font-label-sm text-tertiary uppercase text-[10px]">Price (₹)</label>
                   <input name="price" type="number" defaultValue={editingCar.price} className="bg-black border border-surface-variant w-full p-2 text-white" required />
                 </div>
-                <div className="space-y-1">
-                  <label className="font-label-sm text-tertiary uppercase text-[10px]">Mileage</label>
+                <div className="flex flex-col gap-2">
+                  <label className="font-label-sm text-tertiary uppercase text-[10px]">KM Driven</label>
                   <input name="mileage_km" type="number" defaultValue={editingCar.mileage_km} className="bg-black border border-surface-variant w-full p-2 text-white" required />
                 </div>
                 <div className="space-y-1">

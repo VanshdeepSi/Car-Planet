@@ -95,7 +95,7 @@ export default async function InventoryPage({
                       
                       <div className="mt-auto grid grid-cols-2 gap-y-2 gap-x-4 border-t border-surface-variant pt-4">
                         <div className="flex flex-col">
-                          <span className="text-[10px] text-on-surface/40 uppercase">Mileage</span>
+                          <span className="text-[10px] text-on-surface/40 uppercase">KM DRIVEN</span>
                           <span className="font-label-sm text-on-surface">{car.mileage_km.toLocaleString()} km</span>
                         </div>
                         <div className="flex flex-col">

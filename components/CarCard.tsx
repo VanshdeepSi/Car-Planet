@@ -43,7 +43,7 @@ export default function CarCard({ car }: { car: Car }) {
             <span className="font-label-md text-sm text-white capitalize">{car.transmission}</span>
           </div>
           <div className="flex justify-between items-center py-2 border-b border-surface-variant/50">
-            <span className="font-body-md text-sm text-on-surface-variant">Mileage</span>
+            <span className="font-body-md text-sm text-on-surface-variant uppercase">KM DRIVEN</span>
             <span className="font-label-md text-sm text-white">{car.mileage_km.toLocaleString()} KM</span>
           </div>
           <div className="flex justify-between items-center py-2">
