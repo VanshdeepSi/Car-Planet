@@ -81,7 +81,9 @@ export default function InventoryFilters() {
       )}
 
       {/* Filter Sidebar / Mobile Drawer */}
-      <aside className={`
+      <aside 
+        data-lenis-prevent="true"
+        className={`
         bg-[#1A1A1A] border border-[#2A2A2A] shadow-xl
         lg:block lg:sticky lg:top-28 lg:h-auto lg:w-auto lg:relative lg:translate-y-0 lg:p-6 lg:rounded-none lg:z-auto
         fixed bottom-0 left-0 right-0 z-50 h-[80vh] overflow-y-auto p-6 rounded-t-3xl transition-transform duration-300 ease-in-out
