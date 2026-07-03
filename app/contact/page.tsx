@@ -48,7 +48,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background pt-24 pb-12">
       <main className="flex-grow flex flex-col">
-        <section className="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
+        <section className="pb-section-gap pt-8 md:pt-12 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter">
 {/**/}
 <div className="lg:col-span-5 space-y-12">

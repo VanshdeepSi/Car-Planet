@@ -186,7 +186,7 @@ export default function InsurancePage() {
               </div>
               <div className="flex flex-col">
                 <label className="font-label-sm text-label-sm text-on-surface-variant mb-2 uppercase tracking-widest">Your Phone</label>
-                <input name="phone_number" className="bg-background border border-surface-variant text-white font-body-md py-3 px-4 focus:outline-none focus:border-primary focus:ring-0" placeholder="e.g. 9811606000" type="tel" required />
+                <input name="phone_number" className="bg-background border border-surface-variant text-white font-body-md py-3 px-4 focus:outline-none focus:border-primary focus:ring-0" placeholder="e.g. 98765 43210" type="tel" required />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
