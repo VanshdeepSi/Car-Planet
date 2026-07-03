@@ -121,7 +121,7 @@ function TestDriveForm() {
                 <label className="block font-label-sm text-label-sm text-secondary mb-1 uppercase tracking-wider" htmlFor="vehicle">Preferred Vehicle</label>
                 <div className="relative">
                   <select 
-                    className="w-full bg-background border border-surface-variant text-on-surface font-body-md text-body-md px-4 py-3 appearance-none focus:border-on-surface focus:ring-0 transition-colors cursor-pointer rounded-none" 
+                    className="w-full bg-background border border-surface-variant text-on-surface font-body-md text-body-md pl-4 pr-12 py-3 appearance-none focus:border-on-surface focus:ring-0 transition-colors cursor-pointer rounded-none" 
                     id="vehicle" 
                     name="vehicle" 
                     required 
@@ -169,7 +169,7 @@ function TestDriveForm() {
               <div>
                 <label className="block font-label-sm text-label-sm text-secondary mb-1 uppercase tracking-wider" htmlFor="time">Preferred Time</label>
                 <div className="relative">
-                  <select className="w-full bg-background border border-surface-variant text-on-surface font-body-md text-body-md px-4 py-3 appearance-none focus:border-on-surface focus:ring-0 transition-colors cursor-pointer rounded-none" id="time" name="time" required defaultValue="">
+                  <select className="w-full bg-background border border-surface-variant text-on-surface font-body-md text-body-md pl-4 pr-12 py-3 appearance-none focus:border-on-surface focus:ring-0 transition-colors cursor-pointer rounded-none" id="time" name="time" required defaultValue="">
                     <option className="text-secondary" disabled value="">SELECT TIME</option>
                     <option value="11:00 AM - 01:00 PM">11:00 AM - 01:00 PM</option>
                     <option value="01:00 PM - 04:00 PM">01:00 PM - 04:00 PM</option>
