@@ -33,6 +33,14 @@ function TestDriveForm() {
     fetchCars();
   }, []);
 
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedDate = new Date(e.target.value);
+    if (selectedDate.getDay() === 1) { // 1 is Monday
+      alert("Sorry, we are closed on Mondays. Please select another date.");
+      e.target.value = "";
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -83,7 +91,7 @@ function TestDriveForm() {
   return (
     <div className="min-h-screen bg-background pt-24 pb-12">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-0"></div>
-      <div className="relative z-10 w-full max-w-lg mx-margin-mobile md:mx-auto">
+      <div className="relative z-10 w-full max-w-lg mx-auto px-4 md:px-0">
         <div className="bg-surface-container-high border border-surface-variant p-margin-mobile md:p-10 shadow-2xl relative overflow-hidden group">
           <div className="mb-8 border-b border-surface-variant pb-4">
             <h2 className="font-headline-md text-headline-md text-on-surface uppercase tracking-tight mb-2">Book Test Drive</h2>
@@ -148,7 +156,14 @@ function TestDriveForm() {
               <div>
                 <label className="block font-label-sm text-label-sm text-secondary mb-1 uppercase tracking-wider" htmlFor="date">Preferred Date</label>
                 <div className="relative">
-                  <input className="w-full bg-background border border-surface-variant text-on-surface font-body-md text-body-md px-4 py-3 focus:border-on-surface focus:ring-0 transition-colors [color-scheme:dark]" id="date" name="date" required type="date"/>
+                  <input 
+                    className="w-full bg-background border border-surface-variant text-on-surface font-body-md text-body-md px-4 py-3 focus:border-on-surface focus:ring-0 transition-colors [color-scheme:dark]" 
+                    id="date" 
+                    name="date" 
+                    required 
+                    type="date"
+                    onChange={handleDateChange}
+                  />
                 </div>
               </div>
               <div>
@@ -156,9 +171,9 @@ function TestDriveForm() {
                 <div className="relative">
                   <select className="w-full bg-background border border-surface-variant text-on-surface font-body-md text-body-md px-4 py-3 appearance-none focus:border-on-surface focus:ring-0 transition-colors cursor-pointer rounded-none" id="time" name="time" required defaultValue="">
                     <option className="text-secondary" disabled value="">SELECT TIME</option>
-                    <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
-                    <option value="12:00 PM - 03:00 PM">12:00 PM - 03:00 PM</option>
-                    <option value="03:00 PM - 06:00 PM">03:00 PM - 06:00 PM</option>
+                    <option value="11:00 AM - 01:00 PM">11:00 AM - 01:00 PM</option>
+                    <option value="01:00 PM - 04:00 PM">01:00 PM - 04:00 PM</option>
+                    <option value="04:00 PM - 07:00 PM">04:00 PM - 07:00 PM</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-on-surface">
                     <span className="material-symbols-outlined" style={{ fontVariationSettings: '\'wght\' 300, \'FILL\' 0' }}>schedule</span>
