@@ -7,6 +7,8 @@ export default function InventoryFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const [minPrice, setMinPrice] = useState(searchParams?.get("min_price") || "");
   const [maxPrice, setMaxPrice] = useState(searchParams?.get("max_price") || "");
   const [maxKm, setMaxKm] = useState(searchParams?.get("max_km") || "");
@@ -41,6 +43,7 @@ export default function InventoryFilters() {
     else params.delete("fuel_type");
 
     router.push(`/inventory?${params.toString()}`);
+    setIsOpen(false);
   };
 
   const clearFilters = () => {
@@ -53,19 +56,51 @@ export default function InventoryFilters() {
     params.delete("category");
     
     router.push(`/inventory?${params.toString()}`);
+    setIsOpen(false);
   };
 
   return (
-    <aside className="bg-[#1A1A1A] border border-[#2A2A2A] p-6 sticky top-28 shadow-xl">
-      <div className="flex justify-between items-center mb-6 pb-4 border-b border-[#2A2A2A]">
-        <h3 className="font-headline-sm text-white uppercase tracking-widest flex items-center gap-2">
-          <span className="material-symbols-outlined text-primary text-[20px]">filter_list</span>
-          Filters
-        </h3>
-        <button onClick={clearFilters} className="text-[12px] uppercase text-tertiary hover:text-primary transition-colors tracking-widest">
-          Clear
+    <>
+      {/* Mobile Floating Action Button */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 lg:hidden">
+        <button 
+          onClick={() => setIsOpen(true)}
+          className="bg-primary text-white font-label-md uppercase tracking-widest px-8 py-4 rounded-full shadow-[0_0_20px_rgba(255,51,51,0.4)] flex items-center gap-2 border border-[#ff6666]"
+        >
+          <span className="material-symbols-outlined">filter_list</span>
+          Filter Inventory
         </button>
       </div>
+
+      {/* Mobile Drawer Overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/80 z-40 lg:hidden backdrop-blur-sm"
+          onClick={() => setIsOpen(false)}
+        ></div>
+      )}
+
+      {/* Filter Sidebar / Mobile Drawer */}
+      <aside className={`
+        bg-[#1A1A1A] border border-[#2A2A2A] shadow-xl
+        lg:block lg:sticky lg:top-28 lg:h-auto lg:w-auto lg:relative lg:translate-y-0 lg:p-6 lg:rounded-none lg:z-auto
+        fixed bottom-0 left-0 right-0 z-50 h-[80vh] overflow-y-auto p-6 rounded-t-3xl transition-transform duration-300 ease-in-out
+        ${isOpen ? 'translate-y-0' : 'translate-y-full hidden lg:block'}
+      `}>
+        <div className="flex justify-between items-center mb-6 pb-4 border-b border-[#2A2A2A]">
+          <h3 className="font-headline-sm text-white uppercase tracking-widest flex items-center gap-2">
+            <span className="material-symbols-outlined text-primary text-[20px]">filter_list</span>
+            Filters
+          </h3>
+          <div className="flex items-center gap-4">
+            <button onClick={clearFilters} className="text-[12px] uppercase text-tertiary hover:text-primary transition-colors tracking-widest">
+              Clear
+            </button>
+            <button onClick={() => setIsOpen(false)} className="lg:hidden text-white flex items-center justify-center p-2 rounded-full bg-surface-variant">
+              <span className="material-symbols-outlined text-[16px]">close</span>
+            </button>
+          </div>
+        </div>
 
       <div className="space-y-6">
         {/* Price Range */}
@@ -174,5 +209,6 @@ export default function InventoryFilters() {
         </button>
       </div>
     </aside>
+    </>
   );
 }
