@@ -4,6 +4,7 @@ const nextConfig = {
     remotePatterns: [
       // Supabase Storage — replace "your-project-ref" once you have a project
       { protocol: "https", hostname: "*.supabase.co" },
+      { protocol: "https", hostname: "upload.wikimedia.org" },
     ],
   },
 };
