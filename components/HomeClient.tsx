@@ -231,7 +231,7 @@ export default function HomeClient({ cars }: { cars: Car[] }) {
 <div className="relative w-64 h-64 mb-8 flex items-center justify-center">
 {/*  */}
 <div className="absolute inset-0 bg-primary/20 blur-[40px] rounded-full mix-blend-screen"></div>
-<img alt="Premium Insurance Shield" className="w-full h-full object-contain relative z-10 spring-bounce is-visible mix-blend-lighten" id="shield-img" src="/images/insurance-shield.jpg" />
+<img alt="Premium Insurance Shield" className="w-full h-full object-contain relative z-10 spring-bounce is-visible" id="shield-img" src="/images/insurance-shield.png" />
 </div>
 <h2 className="font-headline-md text-2xl text-white mb-4 uppercase">Instant <span className="text-primary">Insurance</span></h2>
 <p className="font-body-md text-body-md text-on-surface-variant max-w-sm mx-auto mb-8">
