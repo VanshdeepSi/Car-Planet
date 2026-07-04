@@ -231,7 +231,7 @@ export default function HomeClient({ cars }: { cars: Car[] }) {
 <div className="relative w-64 h-64 mb-8 flex items-center justify-center">
 {/*  */}
 <div className="absolute inset-0 bg-primary/20 blur-[40px] rounded-full mix-blend-screen"></div>
-<img alt="Instant Insurance Shield" className="w-full h-full object-contain relative z-10 spring-bounce is-visible" id="shield-img" src="https://lh3.googleusercontent.com/aida/AP1WRLumaVKskcp1JlPMQq-zMi-pTPv0PJ3wf6cu8cqpQlrQmEermcbAIVzzn351NFRfc8u-gWh73-fZ8MfeR1HUDpijs3W_0woUq-O0JcOlzjJBj-qLeGO0C-Av1sagt3qurcQ_jEMcFnxLGb55qI6Yf9qrioXS9f-Wb1UHeSImq98XurO3XTletEG6urVDdJETA-kdFKU82VWCu3jAXeaZ3Z8pWTWTk2BgnnU6QRuG71wO4NFUB_30ay3MQ-Q" />
+<span className="material-symbols-outlined relative z-10 text-[140px] text-white spring-bounce is-visible" id="shield-img" style={{ fontVariationSettings: "'FILL' 0, 'wght' 200" }}>security</span>
 </div>
 <h2 className="font-headline-md text-2xl text-white mb-4 uppercase">Instant <span className="text-primary">Insurance</span></h2>
 <p className="font-body-md text-body-md text-on-surface-variant max-w-sm mx-auto mb-8">
