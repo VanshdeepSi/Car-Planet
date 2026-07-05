@@ -17,7 +17,36 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
       return NextResponse.json({ error: "Missing car ID." }, { status: 400 });
     }
 
-    // 1. Delete car from Database (Images in storage will be orphaned for now to keep it simple and safe)
+    // 1. Fetch the car's image URLs before deleting, so we can clean up storage
+    const { data: carData } = await supabase
+      .from("cars")
+      .select("image_urls")
+      .eq("id", carId)
+      .single();
+
+    // 2. If the car has images stored in Supabase Storage, delete them permanently
+    if (carData?.image_urls && carData.image_urls.length > 0) {
+      const storagePaths = carData.image_urls
+        .map((url: string) => {
+          // Extract the file path after "/object/public/car-images/"
+          const match = url.match(/\/object\/public\/car-images\/(.+)/);
+          return match ? match[1] : null;
+        })
+        .filter(Boolean) as string[];
+
+      if (storagePaths.length > 0) {
+        const { error: storageError } = await supabase.storage
+          .from("car-images")
+          .remove(storagePaths);
+
+        if (storageError) {
+          // Log but don't block — still delete the DB row even if storage cleanup fails
+          console.error("Storage Delete Warning:", storageError);
+        }
+      }
+    }
+
+    // 3. Delete the car row from the database
     const { error: dbError } = await supabase
       .from("cars")
       .delete()
