@@ -1,110 +1,122 @@
-# Dealership Site — Fresh Scaffold
+# 🚘 Car Planet — Premium Used Car Dealership
 
-Next.js 14 (App Router) + TypeScript + Tailwind + Supabase + GSAP/Lenis.
-No `node_modules` included — install fresh, and no existing design opinions baked in
-beyond placeholder tokens you're meant to overwrite.
+A modern, full-stack dealership website built for **Car Planet**, a premium pre-owned car showroom. The website allows customers to browse inventory, book test drives, explore insurance and finance options, and contact the dealership — with real-time WhatsApp notifications sent straight to the owner's phone.
 
-## 1. Install
+---
+
+## Features
+
+- **Home Page** — Animated hero with featured inventory, insurance, finance and sell-car sections
+- **Inventory** — Browse all cars with filters for fuel, transmission, and price range
+- **Car Detail Pages** — Full specs, image gallery, pricing and enquiry options
+- **Book a Test Drive** — Form with date/time selection (Mondays blocked), WhatsApp notification on submit
+- **Finance** — EMI calculator and finance enquiry form
+- **Insurance** — Instant insurance enquiry with zero-depreciation coverage info
+- **Sell Your Car** — Form for customers to submit cars for valuation
+- **Contact** — Business contact form with WhatsApp integration
+- **Admin Panel** — Protected dashboard to add, edit, and delete cars from inventory
+- **Fully Responsive** — Optimised for mobile, tablet, and desktop
+- **WhatsApp Notifications** — All enquiries and bookings trigger live WhatsApp messages to the owner
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Database | Supabase (PostgreSQL) |
+| Storage | Supabase Storage (car images) |
+| Animations | GSAP + Lenis smooth scroll |
+| Notifications | Meta WhatsApp Cloud API |
+| Deployment | Vercel |
+
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/VanshdeepSi/Car-Planet.git
+cd Car-Planet
+```
+
+### 2. Install dependencies
 
 ```bash
 npm install
+```
+
+### 3. Set up environment variables
+
+Copy the example env file and fill in your credentials:
+
+```bash
 cp .env.example .env.local
 ```
 
-Fill `.env.local` with your Supabase project's URL and anon key (Project Settings → API).
+Then open `.env.local` and fill in:
 
-## 2. Create the database tables
-
-In the Supabase SQL editor, run:
-
-```sql
-create table cars (
-  id uuid primary key default gen_random_uuid(),
-  make text not null,
-  model text not null,
-  year int not null,
-  price numeric not null,
-  mileage_km int not null,
-  fuel_type text not null check (fuel_type in ('petrol','diesel','electric','hybrid','cng')),
-  transmission text not null check (transmission in ('manual','automatic')),
-  condition text not null check (condition in ('new','used')),
-  color text not null,
-  vin text,
-  image_urls text[] not null default '{}',
-  description text,
-  created_at timestamptz not null default now()
-);
-
-create table leads (
-  id uuid primary key default gen_random_uuid(),
-  name text not null,
-  phone text not null,
-  message text,
-  interested_car_id uuid references cars(id),
-  created_at timestamptz not null default now()
-);
-
--- Public read on cars, public insert on leads (contact form), nothing else public
-alter table cars enable row level security;
-alter table leads enable row level security;
-
-create policy "Cars are publicly readable" on cars for select using (true);
-create policy "Anyone can submit a lead" on leads for insert with check (true);
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 ```
 
-Add a `cars` bucket in Supabase Storage if you want to host images there — otherwise
-just paste external image URLs into `image_urls`.
+You can find all these keys in your Supabase project under **Settings → API**.
 
-## 3. Run it
+### 4. Run the development server
 
 ```bash
 npm run dev
 ```
 
-Inventory and contact pages are already wired to Supabase. Admin page has **no auth
-guard yet** — add one (Supabase Auth + middleware check) before it's ever public.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 4. Bring your Stitch designs in
+---
 
-Every file with a `// TODO` or `⚠️ PLACEHOLDER` comment is meant to be replaced:
-
-1. **`tailwind.config.ts`** — swap the `brand.*` colors and `fontFamily` for the
-   values from your Stitch `DESIGN.md`. Do this first — every page inherits from it.
-2. **`app/layout.tsx`** — load your real display/body fonts via `next/font` and set
-   the `--font-display` / `--font-body` CSS variables.
-3. **`app/page.tsx`, `app/inventory/page.tsx`, `app/inventory/[id]/page.tsx`,
-   `app/contact/page.tsx`** — replace the placeholder markup with your Stitch export.
-   Keep the existing data-fetching and the `useGSAP` hero pattern in `page.tsx`; just
-   retarget the CSS selectors at your real hero elements.
-4. If you connected the Stitch MCP server to Claude Code, you can ask it directly:
-   *"rebuild app/inventory/page.tsx to match this Stitch design, keep the Supabase
-   query and CarCard component as-is."*
-
-## 5. Layer in 21st.dev components + animation
-
-Once a page's real markup is in:
-- Pull interactive pieces (filters, carousels, modals) from 21st.dev via the Magic
-  MCP (`/ui ...`) instead of hand-rolling them.
-- Add GSAP `ScrollTrigger` reveals last, after the real layout is in place — animating
-  placeholder divs just means redoing the animation code later.
-
-## Structure
+## Project Structure
 
 ```
-app/
-  layout.tsx          root layout — Navbar + SmoothScroll wrapper
-  page.tsx             homepage (placeholder)
-  inventory/page.tsx    car grid, fetches from Supabase
-  inventory/[id]/page.tsx  car detail + EMI calculator
-  contact/page.tsx      lead form → Supabase insert
-  admin/page.tsx        dashboard shell (add auth before shipping)
-components/
-  SmoothScroll.tsx      Lenis + GSAP ticker sync, respects prefers-reduced-motion
-  Navbar.tsx
-  CarCard.tsx
-  EMICalculator.tsx      fully functional, real EMI math
-lib/
-  supabase/client.ts     browser client
-  supabase/server.ts     server client (Server Components/Actions)
-  types.ts               Car / Lead types
+dealership/
+├── app/
+│   ├── admin/          # Protected admin panel
+│   ├── api/            # API routes (WhatsApp, cars)
+│   ├── contact/        # Contact page
+│   ├── finance/        # Finance and EMI page
+│   ├── insurance/      # Insurance enquiry page
+│   ├── inventory/      # Car listing and detail pages
+│   ├── sell-car/       # Sell your car page
+│   ├── test-drive/     # Book a test drive page
+│   └── page.tsx        # Homepage
+├── components/         # Reusable UI components
+├── lib/                # Supabase client, types, utils
+├── public/             # Static assets and images
+└── tailwind.config.ts  # Design tokens and theme
 ```
+
+---
+
+## Deployment
+
+This project is deployed on **Vercel**. To deploy:
+
+1. Push your code to GitHub.
+2. Connect the repository to Vercel.
+3. Add the environment variables from `.env.local` into **Vercel → Settings → Environment Variables**.
+4. Vercel will auto-deploy on every `git push` to `main`.
+
+---
+
+## WhatsApp Integration
+
+All booking and enquiry forms send a real-time WhatsApp notification to the dealership owner's number via the **Meta WhatsApp Cloud API**. Make sure the `WHATSAPP_API_TOKEN` and `WHATSAPP_PHONE_NUMBER_ID` are configured in your environment variables for this to work.
+
+---
+
+## License
+
+This project is private and built exclusively for **Car Planet**. All rights reserved.
